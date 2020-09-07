@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import TextButton from './TextButton';
 import { connect } from "react-redux";
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 class Quiz extends Component {
 
@@ -44,6 +45,8 @@ class Quiz extends Component {
 
         if (currentQuestion + 1  === totalQuestions) {
             this.setState({finished: true});
+            clearLocalNotification();
+            setLocalNotification();
         } else {
             this.setState({currentQuestion: currentQuestion + 1});
         }

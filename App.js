@@ -11,6 +11,7 @@ import Deck from './components/Deck';
 import NewDeck from './components/NewDeck';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/helpers';
 
 function Home() {
   return (
@@ -45,6 +46,10 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
 
   render() {
 
