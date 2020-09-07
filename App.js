@@ -12,6 +12,7 @@ import NewDeck from './components/NewDeck';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
 import { setLocalNotification } from './utils/helpers';
+import * as  Notifications  from  'expo-notifications' ;
 
 function Home() {
   return (
@@ -48,6 +49,15 @@ const Tab = createBottomTabNavigator();
 export default class App extends Component {
 
   componentDidMount() {
+    Notifications.setNotificationHandler ( { 
+      handleNotification : async  ( )  =>  { 
+        return  { 
+          shouldShowAlert : true , 
+          shouldPlaySound : true , 
+          shouldSetBadge : true , 
+        } ; 
+      } , 
+    } ) ;
     setLocalNotification();
   }
 

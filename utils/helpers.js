@@ -21,7 +21,7 @@ export function createNotification() {
       body: "don't forget to play quiz all days",
       data: { data: "goes here" },
     },
-    trigger: { seconds: (tomorrow.getTime() - Date.now())/1000 }
+    trigger: { seconds: (tomorrow.getTime() - Date.now())/1000 } 
   }
 }
 
@@ -40,6 +40,9 @@ export function setLocalNotification () {
                 AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
               }
             })
+            .catch((error) => {
+              console.warn(`Error Notifications permission: ${error}`)
+          });
         }
       })
   }

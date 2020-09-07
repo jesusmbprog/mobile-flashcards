@@ -46,7 +46,7 @@ class Quiz extends Component {
         if (currentQuestion + 1  === totalQuestions) {
             this.setState({finished: true});
             clearLocalNotification()
-                .then(setLocalNotification)
+            setLocalNotification()
         } else {
             this.setState({currentQuestion: currentQuestion + 1});
         }
