@@ -10,19 +10,19 @@ export function clearLocalNotification () {
 }
 
 export function createNotification() {
-    return {
-        title: 'Play quiz!',
-        body: "don't forget to play quiz all days",
-        ios: { 
-            sound: true,
-        },
-        android: {
-            sound: true,
-            priority: 'high',
-            sticky: false,
-            vibrate: true, 
-        }
-    };
+  let tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  tomorrow.setHours(20)
+  tomorrow.setMinutes(0)
+
+  return {
+    content: {
+      title: "Play quiz!",
+      body: "don't forget to play quiz all days",
+      data: { data: "goes here" },
+    },
+    trigger: { seconds: (tomorrow.getTime() - Date.now())/1000 }
+  }
 }
 
 export function setLocalNotification () {
@@ -35,18 +35,7 @@ export function setLocalNotification () {
               if (status === 'granted') {
                 Notifications.cancelAllScheduledNotificationsAsync()
   
-                let tomorrow = new Date()
-                tomorrow.setDate(tomorrow.getDate() + 1)
-                tomorrow.setHours(20)
-                tomorrow.setMinutes(0)
-  
-                Notifications.scheduleNotificationAsync(
-                  createNotification(),
-                  {
-                    time: tomorrow,
-                    repeat: 'day',
-                  }
-                )
+                Notifications.scheduleNotificationAsync(createNotification())
   
                 AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
               }
